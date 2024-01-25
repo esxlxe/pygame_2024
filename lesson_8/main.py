@@ -35,7 +35,7 @@ surface_bg = pygame.image.load("graphics/bg_rock.png").convert()
 enemy_wolf = pygame.image.load("graphics/enemy_wolf.png").convert_alpha()
 enemy_rect = enemy_wolf.get_rect(midbottom=(380, 424))
 
-player_surface = pygame.image.load("graphics/player/player_1.png").convert_alpha()
+player_surface = pygame.image.load("graphics/player_1.png").convert_alpha()
 player_rect = player_surface.get_rect(midbottom=(80, 424))
 
 # collision_sound = pygame.mixer.Sound("sounds/damage.wav")
