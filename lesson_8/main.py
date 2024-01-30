@@ -1,27 +1,36 @@
 import pygame
+import sys
 
-# инициализация Pygame / как завести ключ зажигания
+# запустим pygame (инициализируем)
 pygame.init()
 
-SCREEN_SIZE = (400, 300)
 FPS = 60
+SCREEN_SIZE = (600, 400)
 
-# отобразить экран
+# создать окно
 screen = pygame.display.set_mode(SCREEN_SIZE)
-
-# объект поможет отслеживать время
+# для отслеживания времени
 clock = pygame.time.Clock()
+surface_font_1 = pygame.font.Font("font/NewTimeNerd.ttf", 50)
 
-test_surface = pygame.Surface((100, 200))
-test_surface.fill((255,0,255)) # RGB
+surface_sky = pygame.image.load("grapics/sky.png").convert()
+surface_ground = pygame.image.load("grapics/ground.png").convert()
+surface_text_hp = surface_font_1.render("HP ", False, "White")
+
 
 while True:
-    # эвэнт цикл
+    # цикл событий
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            # деинициализация Pygame
             pygame.quit()
-    screen.blit(test_surface, (0,0))
+            # завершение работы программы
+            sys.exit()
+    screen.blit(surface_sky, (0, 0))
+    screen.blit(surface_ground, (0, 280))
+    screen.blit(surface_text_hp, (150, 50))
 
+    # обновлять кадры
     pygame.display.update()
-
+    # верхняя граница FPS
     clock.tick(FPS)
