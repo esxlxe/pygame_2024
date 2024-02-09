@@ -1,36 +1,50 @@
 import pygame
 import sys
 
-# запустим pygame (инициализируем)
-pygame.init()
-
+SCREEN_SIZE = (700, 500)
 FPS = 60
-SCREEN_SIZE = (600, 400)
+moving_right = False
 
-# создать окно
+# инициация Pygame
+pygame.init()
+# отображать окно
 screen = pygame.display.set_mode(SCREEN_SIZE)
-# для отслеживания времени
+# отслеживать время
 clock = pygame.time.Clock()
-surface_font_1 = pygame.font.Font("font/NewTimeNerd.ttf", 50)
 
-surface_sky = pygame.image.load("grapics/sky.png").convert()
-surface_ground = pygame.image.load("grapics/ground.png").convert()
-surface_text_hp = surface_font_1.render("HP ", False, "White")
+surface_sky = pygame.image.load("graphics/sky.png")
+surface_ground = pygame.image.load("graphics/ground.png")
+surface_enemy_fox = pygame.image.load("graphics/enemy_fox.png").convert_alpha()
+rect_enemy_fox = surface_enemy_fox.get_rect(midbottom=(420, 420))
+surface_player = pygame.image.load("graphics/player.png").convert_alpha()
+rect_player = surface_player.get_rect(midbottom=(50, 420))
 
+surface_font = pygame.font.Font("fonts/PressStart.ttf", 20)
+surface_text = surface_font.render("HP: __", False, "White")
 
 while True:
     # цикл событий
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            # деинициализация Pygame
+            # деинициализация pygame
             pygame.quit()
-            # завершение работы программы
+            # выход из программы
             sys.exit()
-    screen.blit(surface_sky, (0, 0))
-    screen.blit(surface_ground, (0, 280))
-    screen.blit(surface_text_hp, (150, 50))
+        if event.type == pygame.K_d:
+            moving_right = True
 
-    # обновлять кадры
+    screen.blit(surface_sky, (0, 0))
+    screen.blit(surface_ground, (0, 420))
+    screen.blit(surface_text, (500, 40))
+    screen.blit(surface_enemy_fox, rect_enemy_fox)
+    screen.blit(surface_player, rect_player)
+    rect_enemy_fox.x -= 3
+    if rect_enemy_fox.x < 0:
+        rect_enemy_fox.x = 800
+
+
+    # обновление кадров
     pygame.display.update()
-    # верхняя граница FPS
+
+    # Устанавливаем FPS
     clock.tick(FPS)
