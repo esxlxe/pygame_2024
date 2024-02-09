@@ -20,8 +20,8 @@ rect_enemy_fox = surface_enemy_fox.get_rect(midbottom=(420, 420))
 surface_player = pygame.image.load("graphics/player.png").convert_alpha()
 rect_player = surface_player.get_rect(midbottom=(50, 420))
 
-surface_font = pygame.font.Font("fonts/PressStart.ttf", 20)
-surface_text = surface_font.render("HP: __", False, "White")
+# surface_font = pygame.font.Font("fonts/PressStart.ttf", 20)
+# surface_text = surface_font.render("HP: __", False, "White")
 
 while True:
     # цикл событий
@@ -41,7 +41,7 @@ while True:
 
     screen.blit(surface_sky, (0, 0))
     screen.blit(surface_ground, (0, 420))
-    screen.blit(surface_text, (500, 40))
+    # screen.blit(surface_text, (500, 40))
     screen.blit(surface_enemy_fox, rect_enemy_fox)
 
     if moving_right == True:
