@@ -4,6 +4,7 @@ import sys
 SCREEN_SIZE = (700, 500)
 FPS = 60
 moving_right = False
+moving_left = False
 
 # инициация Pygame
 pygame.init()
@@ -30,13 +31,23 @@ while True:
             pygame.quit()
             # выход из программы
             sys.exit()
-        if event.type == pygame.K_d:
-            moving_right = True
+        # Проверяем нажата ли клавиша
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_d:
+                moving_right = True
+        if event.type == pygame.KEYUP:
+            # TODO: добавьте код по аналогии с KEYDOWN
+            ...
 
     screen.blit(surface_sky, (0, 0))
     screen.blit(surface_ground, (0, 420))
     screen.blit(surface_text, (500, 40))
     screen.blit(surface_enemy_fox, rect_enemy_fox)
+
+    if moving_right == True:
+        rect_player.x += 1
+
+
     screen.blit(surface_player, rect_player)
     rect_enemy_fox.x -= 3
     if rect_enemy_fox.x < 0:
